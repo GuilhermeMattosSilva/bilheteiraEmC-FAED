@@ -1,32 +1,24 @@
-# Prerequisites
-*.d
+# Build folders
+Debug/
+Release/
+x64/
+x86/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Object files
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+*.o
 
 # Executables
 *.exe
-*.out
-*.app
+
+# Libraries
+*.lib
+*.dll
+
+# Logs
+*.log
