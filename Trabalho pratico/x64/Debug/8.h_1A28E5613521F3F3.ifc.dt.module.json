@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Trabalho pratico\\x64\\Debug\\8.obj",
+            "outputs": [
+                "Trabalho pratico\\x64\\Debug\\8.h_1A28E5613521F3F3.ifc.dt.module.json",
+                "Trabalho pratico\\x64\\Debug\\8.h_1A28E5613521F3F3.ifc.dt.d.json",
+                "Trabalho pratico\\x64\\Debug\\8.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\admin\\Desktop\\Trabalho Pratico C\\ConsoleApplication1\\8.h",
+                    "source-path": "c:\\users\\admin\\desktop\\trabalho pratico c\\consoleapplication1\\8.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

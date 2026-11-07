@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Trabalho pratico\\x64\\Debug\\utilizadores.h.obj",
+            "outputs": [
+                "C:\\Users\\admin\\Desktop\\Trabalho Pratico C\\bilheteiraEmC\\Trabalho pratico\\x64\\Debug\\vc145.pdb",
+                "Trabalho pratico\\x64\\Debug\\",
+                "C:\\Users\\admin\\Desktop\\Trabalho Pratico C\\bilheteiraEmC\\Trabalho pratico\\x64\\Debug\\utilizadores.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "utilizadores.h",
+                    "source-path": "c:\\users\\admin\\desktop\\trabalho pratico c\\bilheteiraemc\\utilizadores.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

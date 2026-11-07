@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Trabalho pratico\\x64\\Debug\\estruturas.obj",
+            "outputs": [
+                "Trabalho pratico\\x64\\Debug\\estruturas.h.obj.dt.module.json",
+                "Trabalho pratico\\x64\\Debug\\estruturas.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
