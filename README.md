@@ -5,7 +5,7 @@
 Executar:
 
 ```sql
-database/criar_bd.sql
+database/criar-bd.sql
 ```
 
 ## 2. Inserir Dados de Teste
@@ -13,7 +13,7 @@ database/criar_bd.sql
 Executar:
 
 ```sql
-database/dados_teste.sql
+database/teste-bd.sql
 ```
 
 ## 3. Configurar a ligação ODBC
