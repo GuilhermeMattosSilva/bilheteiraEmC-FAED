@@ -6,11 +6,11 @@ GO
 
 CREATE TABLE Users (
     id_user INT IDENTITY(1,1) PRIMARY KEY,
-    user_name VARCHAR(100) NOT NULL,
+    user_name VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(150) NOT NULL UNIQUE,
-    NIF CHAR(9) NOT NULL UNIQUE
+    NIF CHAR(9) NOT NULL UNIQUE,
+    role VARCHAR(20) NOT NULL DEFAULT 'USER'
 );
-GO
 
 CREATE TABLE Shows (
     id_show INT IDENTITY(1,1) PRIMARY KEY,
@@ -19,21 +19,19 @@ CREATE TABLE Shows (
     show_date DATETIME NOT NULL,
     price_ticket DECIMAL(10,2) NOT NULL
 );
-GO
 
 CREATE TABLE Type_tickets (
     id_type INT IDENTITY(1,1) PRIMARY KEY,
     description VARCHAR(100) NOT NULL,
     discount_percentage DECIMAL(5,2) NOT NULL
 );
-GO
 
 CREATE TABLE Tickets (
     id_ticket INT IDENTITY(1,1) PRIMARY KEY,
     id_user INT NOT NULL,
     id_show INT NOT NULL,
     id_type INT NOT NULL,
-    quantity INT NOT NULL CHECK (quantity > 0),
+    quantity INT NOT NULL CHECK(quantity > 0),
 
     CONSTRAINT FK_Tickets_Users
         FOREIGN KEY (id_user)
@@ -47,7 +45,6 @@ CREATE TABLE Tickets (
         FOREIGN KEY (id_type)
         REFERENCES Type_tickets(id_type)
 );
-GO
 
 CREATE TABLE Receipts (
     id_receipt INT IDENTITY(1,1) PRIMARY KEY,
@@ -59,4 +56,3 @@ CREATE TABLE Receipts (
         FOREIGN KEY (id_ticket)
         REFERENCES Tickets(id_ticket)
 );
-GO

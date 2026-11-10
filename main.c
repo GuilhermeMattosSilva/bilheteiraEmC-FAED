@@ -1,19 +1,16 @@
-#include <stdio.h>
 #include "basededados.h"
+#include "utilizadores.h"
 
 int main()
 {
-    if (ligarBD())
+    if (!ligarBD())
     {
-        printf("Ligacao realizada com sucesso!\n");
-    }
-    else
-    {
-        printf("Erro ao ligar a base de dados!\n");
         return 1;
     }
 
-    fecharBD();
+    login();
+
+    desligarBD();
 
     return 0;
 }

@@ -1,3 +1,4 @@
+#include "basededados.h"
 #include <windows.h>
 #include <sql.h>
 #include <sqlext.h>
@@ -42,17 +43,10 @@ int ligarBD()
     return SQL_SUCCEEDED(ret);
 }
 
-void fecharBD()
+void desligarBD()
 {
     SQLDisconnect(hDbc);
 
-    SQLFreeHandle(
-        SQL_HANDLE_DBC,
-        hDbc
-    );
-
-    SQLFreeHandle(
-        SQL_HANDLE_ENV,
-        hEnv
-    );
+    SQLFreeHandle(SQL_HANDLE_DBC, hDbc);
+    SQLFreeHandle(SQL_HANDLE_ENV, hEnv);
 }
