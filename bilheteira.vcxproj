@@ -140,6 +140,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="estruturas.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="utilizadores.c" />
     <ClCompile Include="utilizadores.h" />

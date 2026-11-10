@@ -6,6 +6,7 @@
 
 #include "utilizadores.h"
 #include "basededados.h"
+#include "estruturas.h"
 
 int loginUtilizador(char nome[], char nif[])
 {
@@ -272,10 +273,12 @@ void login()
             if (strcmp(role, "ADMIN") == 0)
             {
                 printf("Bem-vindo Administrador!\n");
+                menuAdmin();
             }
             else
             {
                 printf("Bem-vindo Utilizador!\n");
+                menuUtilizador();
             }
         }
         else

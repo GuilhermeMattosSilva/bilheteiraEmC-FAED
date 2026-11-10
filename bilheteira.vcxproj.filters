@@ -48,6 +48,9 @@
     <ClCompile Include="utilizadores.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="estruturas.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bilhetes.h">
