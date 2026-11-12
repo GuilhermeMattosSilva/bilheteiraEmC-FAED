@@ -7,6 +7,10 @@
 #include "utilizadores.h"
 #include "basededados.h"
 #include "estruturas.h"
+#include "bilhetes.h"
+#include "faturas.h"
+#include "concertos.h"
+
 
 int loginUtilizador(char nome[], char nif[])
 {
@@ -234,6 +238,55 @@ int obterRole(char nome[], char nif[], char role[])
     SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
     return 0;
 }
+int obterIdUtilizador(char nome[], char nif[])
+{
+    SQLHSTMT hStmt;
+    SQLRETURN ret;
+
+    int id = 0;
+
+    char query[512];
+
+    sprintf_s(
+        query,
+        sizeof(query),
+        "SELECT id_user "
+        "FROM dbo.Users "
+        "WHERE user_name='%s' "
+        "AND NIF='%s'",
+        nome,
+        nif);
+
+    SQLAllocHandle(
+        SQL_HANDLE_STMT,
+        hDbc,
+        &hStmt);
+
+    ret = SQLExecDirectA(
+        hStmt,
+        (SQLCHAR*)query,
+        SQL_NTS);
+
+    if (SQL_SUCCEEDED(ret))
+    {
+        if (SQLFetch(hStmt) == SQL_SUCCESS)
+        {
+            SQLGetData(
+                hStmt,
+                1,
+                SQL_C_LONG,
+                &id,
+                0,
+                NULL);
+        }
+    }
+
+    SQLFreeHandle(
+        SQL_HANDLE_STMT,
+        hStmt);
+
+    return id;
+}
 
 
 void login()
@@ -265,20 +318,26 @@ void login()
         if (loginUtilizador(nome, nif))
         {
             char role[20];
+            int idUser;
 
             obterRole(nome, nif, role);
+
+            /* NOVO */
+            idUser = obterIdUtilizador(nome, nif);
 
             printf("\nLogin efetuado com sucesso!\n");
 
             if (strcmp(role, "ADMIN") == 0)
             {
                 printf("Bem-vindo Administrador!\n");
-                menuAdmin();
+
+                menuAdmin(idUser);
             }
             else
             {
                 printf("Bem-vindo Utilizador!\n");
-                menuUtilizador();
+
+                menuUtilizador(idUser);
             }
         }
         else
@@ -331,5 +390,6 @@ void login()
 
     default:
         printf("\nOpcao invalida!\n");
+        break;
     }
 }

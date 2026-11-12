@@ -29,7 +29,7 @@ int ligarBD()
         NULL,
         (SQLCHAR*)
         "DRIVER={ODBC Driver 18 for SQL Server};"
-        "SERVER=localhost;"
+        "SERVER=localhost\\SQLEXPRESS;"
         "DATABASE=Bilheteira;"
         "Trusted_Connection=yes;"
         "TrustServerCertificate=yes;",

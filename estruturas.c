@@ -45,47 +45,55 @@ void menuAdmin()
 
     } while (opcao != 0);
 }
-
+ 
 void menuUtilizador()
 {
     int opcao;
 
     do
     {
-        printf("\n===== MENU UTILIZADOR =====\n");
-        printf("1 - Ver Espetaculos\n");
+        printf("\n");
+        printf("=================================\n");
+        printf("         MENU UTILIZADOR\n");
+        printf("=================================\n");
+        printf("1 - Ver Concertos\n");
         printf("2 - Comprar Bilhete\n");
-        printf("3 - Os Meus Bilhetes\n");
-        printf("4 - Os Meus Recibos\n");
+        printf("3 - Consultar Bilhetes\n");
+        printf("4 - Cancelar Bilhete\n");
+        printf("5 - Consultar Faturas\n");
         printf("0 - Logout\n");
 
-        printf("Opcao: ");
+        printf("\nOpcao: ");
         scanf_s("%d", &opcao);
 
         switch (opcao)
         {
         case 1:
-            printf("Lista de espetaculos\n");
+            listarConcertos();
             break;
 
         case 2:
-            printf("Comprar bilhete\n");
+            comprarBilhete();
             break;
 
         case 3:
-            printf("Os meus bilhetes\n");
+            consultarBilhetes();
             break;
 
         case 4:
-            printf("Os meus recibos\n");
+            cancelarBilhete();
+            break;
+
+        case 5:
+            listarFaturas();
             break;
 
         case 0:
-            printf("Logout efetuado.\n");
+            printf("\nLogout efetuado.\n");
             break;
 
         default:
-            printf("Opcao invalida.\n");
+            printf("\nOpcao invalida.\n");
         }
 
     } while (opcao != 0);

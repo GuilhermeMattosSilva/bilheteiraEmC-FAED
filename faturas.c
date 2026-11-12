@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include "faturas.h"
 
-void faturas() {
-
+void listarFaturas()
+{
+    printf("\nListar Faturas\n");
 }
