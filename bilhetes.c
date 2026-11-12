@@ -28,44 +28,24 @@ void comprarBilhete(int idUser)
 
     printf("\nTipos de Bilhete:\n");
 
-    SQLAllocHandle(SQL_HANDLE_STMT,
-        hDbc,
-        &stmt);
+    SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &stmt);
 
-    SQLExecDirect(stmt,
+    SQLExecDirectA(
+        stmt,
         (SQLCHAR*)
-        "SELECT id_type,"
-        "description,"
-        "discount_percentage "
+        "SELECT id_type, description, discount_percentage "
         "FROM dbo.Type_tickets",
         SQL_NTS);
 
     int id;
     char descricao[100];
-    double desconto;
+    double desconto = 0;
 
     while (SQLFetch(stmt) == SQL_SUCCESS)
     {
-        SQLGetData(stmt,
-            1,
-            SQL_C_LONG,
-            &id,
-            0,
-            NULL);
-
-        SQLGetData(stmt,
-            2,
-            SQL_C_CHAR,
-            descricao,
-            sizeof(descricao),
-            NULL);
-
-        SQLGetData(stmt,
-            3,
-            SQL_C_DOUBLE,
-            &desconto,
-            0,
-            NULL);
+        SQLGetData(stmt, 1, SQL_C_LONG, &id, 0, NULL);
+        SQLGetData(stmt, 2, SQL_C_CHAR, descricao, sizeof(descricao), NULL);
+        SQLGetData(stmt, 3, SQL_C_DOUBLE, &desconto, 0, NULL);
 
         printf("%d - %s (%.2f%%)\n",
             id,
@@ -73,8 +53,7 @@ void comprarBilhete(int idUser)
             desconto);
     }
 
-    SQLFreeHandle(SQL_HANDLE_STMT,
-        stmt);
+    SQLFreeHandle(SQL_HANDLE_STMT, stmt);
 
     printf("\nTipo: ");
     scanf_s("%d", &idTipo);
@@ -82,7 +61,85 @@ void comprarBilhete(int idUser)
     printf("Quantidade: ");
     scanf_s("%d", &quantidade);
 
+    double preco = 0;
+    desconto = 0;
+
     char sql[300];
+
+    /* Buscar preço do concerto */
+    SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &stmt);
+
+    sprintf_s(sql,
+        sizeof(sql),
+        "SELECT price_ticket "
+        "FROM dbo.Shows "
+        "WHERE id_show = %d",
+        idShow);
+
+    SQLExecDirectA(stmt, (SQLCHAR*)sql, SQL_NTS);
+
+    if (SQLFetch(stmt) == SQL_SUCCESS)
+    {
+        SQLGetData(stmt,
+            1,
+            SQL_C_DOUBLE,
+            &preco,
+            0,
+            NULL);
+    }
+
+    SQLFreeHandle(SQL_HANDLE_STMT, stmt);
+
+    /* Buscar desconto do tipo */
+    SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &stmt);
+
+    sprintf_s(sql,
+        sizeof(sql),
+        "SELECT discount_percentage "
+        "FROM dbo.Type_tickets "
+        "WHERE id_type = %d",
+        idTipo);
+
+    SQLExecDirectA(stmt, (SQLCHAR*)sql, SQL_NTS);
+
+    if (SQLFetch(stmt) == SQL_SUCCESS)
+    {
+        SQLGetData(stmt,
+            1,
+            SQL_C_DOUBLE,
+            &desconto,
+            0,
+            NULL);
+    }
+
+    SQLFreeHandle(SQL_HANDLE_STMT, stmt);
+
+    double subtotal = preco * quantidade;
+    double valorDesconto = subtotal * (desconto / 100.0);
+    double total = subtotal - valorDesconto;
+
+    printf("\n==============================");
+    printf("\nRESUMO DA COMPRA");
+    printf("\n==============================");
+    printf("\nPreco unitario : %.2f EUR", preco);
+    printf("\nQuantidade     : %d", quantidade);
+    printf("\nSubtotal       : %.2f EUR", subtotal);
+    printf("\nDesconto       : %.2f%%", desconto);
+    printf("\nValor desconto : %.2f EUR", valorDesconto);
+    printf("\nTOTAL          : %.2f EUR", total);
+    printf("\n==============================\n");
+
+    char confirmar;
+
+    printf("\nConfirmar compra? (S/N): ");
+    scanf_s(" %c", &confirmar, 1);
+
+    if (confirmar != 'S' &&
+        confirmar != 's')
+    {
+        printf("\nCompra cancelada!\n");
+        return;
+    }
 
     sprintf_s(sql,
         sizeof(sql),
@@ -98,15 +155,36 @@ void comprarBilhete(int idUser)
         hDbc,
         &stmt);
 
-    SQLExecDirectA(
-        stmt,
-        (SQLCHAR*)sql,
-        SQL_NTS);
+    SQLRETURN ret =
+        SQLExecDirectA(
+            stmt,
+            (SQLCHAR*)sql,
+            SQL_NTS);
 
-    SQLFreeHandle(SQL_HANDLE_STMT,
-        stmt);
+    if (!SQL_SUCCEEDED(ret))
+    {
+        SQLCHAR sqlState[6];
+        SQLCHAR message[256];
+        SQLINTEGER nativeError;
+        SQLSMALLINT textLength;
 
-    printf("\nCompra realizada com sucesso!\n");
+        SQLGetDiagRecA(
+            SQL_HANDLE_STMT,
+            stmt,
+            1,
+            sqlState,
+            &nativeError,
+            message,
+            sizeof(message),
+            &textLength);
+
+    }
+    else
+    {
+        printf("\nCompra realizada com sucesso!\n");
+    }
+
+    SQLFreeHandle(SQL_HANDLE_STMT, stmt);
 }
 
 void consultarBilhetes(int idUser)

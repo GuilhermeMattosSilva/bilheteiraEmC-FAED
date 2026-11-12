@@ -322,7 +322,6 @@ void login()
 
             obterRole(nome, nif, role);
 
-            /* NOVO */
             idUser = obterIdUtilizador(nome, nif);
 
             printf("\nLogin efetuado com sucesso!\n");
@@ -336,6 +335,7 @@ void login()
             else
             {
                 printf("Bem-vindo Utilizador!\n");
+                idUser = obterIdUtilizador(nome, nif);
 
                 menuUtilizador(idUser);
             }

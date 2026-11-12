@@ -46,7 +46,7 @@ void menuAdmin()
     } while (opcao != 0);
 }
  
-void menuUtilizador()
+void menuUtilizador(int idUser)
 {
     int opcao;
 
@@ -73,7 +73,7 @@ void menuUtilizador()
             break;
 
         case 2:
-            comprarBilhete();
+            comprarBilhete(idUser);
             break;
 
         case 3:

@@ -2,7 +2,7 @@
 #define ESTRUTURAS_H
 
 void menuAdmin();
-void menuUtilizador();
+void menuUtilizador(int idUser);
 
 int loginUtilizador(char nome[], char nif[]);
 void criarUtilizador(char nome[], char email[], char nif[]);

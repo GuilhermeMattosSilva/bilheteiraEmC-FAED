@@ -56,3 +56,20 @@ CREATE TABLE Receipts (
         FOREIGN KEY (id_ticket)
         REFERENCES Tickets(id_ticket)
 );
+
+INSERT INTO dbo.Shows
+(show_name, location, show_date, price_ticket)
+VALUES
+('Concerto Teste', 'Braga', '2026-12-15', 25.00);
+
+INSERT INTO dbo.Type_tickets
+(description, discount_percentage)
+VALUES
+('Normal', 0),
+('Estudante', 20),
+('Senior', 30);
+
+INSERT INTO dbo.Users
+(user_name, email, NIF, role)
+VALUES
+('admin', 'admin@bilheteira.pt', '1', 'ADMIN');
