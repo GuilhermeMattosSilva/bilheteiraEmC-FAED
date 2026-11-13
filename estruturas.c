@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 #include "estruturas.h"
+#include "concertos.h"
 
 void menuAdmin()
 {
@@ -20,9 +22,9 @@ void menuAdmin()
         switch (opcao)
         {
         case 1:
-            printf("Gestao de espetaculos\n");
-            break;
+            gerirConcerto();
 
+            break;
         case 2:
             printf("Gestao de utilizadores\n");
             break;
